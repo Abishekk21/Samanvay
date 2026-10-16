@@ -5,31 +5,35 @@
 
 :root {
   /* Premium Color Palette */
-  --archeville-charcoal: #1a1d23;
+  --archeville-charcoal: #24282D;
   --archeville-graphite: #2d3238;
   --archeville-slate: #3e444c;
-  --archeville-gray: #6c757d;
+  --archeville-gray: #667085;
   --archeville-silver: #adb5bd;
   
   --archeville-white: #ffffff;
   --archeville-offwhite: #f8f9fa;
-  --archeville-cream: #fafbfc;
+  --archeville-cream: #F5F7FA;
   
-  --archeville-blue: #0066cc;
+  --archeville-blue: #0969DA;
   --archeville-blue-hover: #0052a3;
   --archeville-blue-light: #e6f2ff;
+  
+  --archeville-text-primary: #202832;
+  --archeville-text-secondary: #667085;
+  --archeville-border: #E2E7EF;
   
   --archeville-gold: #d4af37;
   --archeville-gold-light: #f4e5b8;
   --archeville-amber: #ff9500;
   
-  --archeville-success: #28a745;
+  --archeville-success: #10b981;
   --archeville-success-light: #d4edda;
   
   --archeville-danger: #dc3545;
   --archeville-danger-light: #f8d7da;
   
-  --archeville-warning: #ffc107;
+  --archeville-warning: #f59e0b;
   --archeville-warning-light: #fff3cd;
   
   /* Typography Scale */

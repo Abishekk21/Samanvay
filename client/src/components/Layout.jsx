@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import VideoBackground from './VideoBackground';
 
 function Layout({ children }) {
   const location = useLocation();
@@ -11,13 +12,21 @@ function Layout({ children }) {
   if (isHome) {
     return (
       <div className="app-container">
-        {children}
+        {/* Video Background */}
+        <VideoBackground />
+        
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          {children}
+        </div>
       </div>
     );
   }
   
   return (
     <div className="app-container">
+      {/* Video Background */}
+      <VideoBackground />
+      
       <header className="app-header">
         <div className="container">
           <div className="d-flex justify-content-between align-items-center">

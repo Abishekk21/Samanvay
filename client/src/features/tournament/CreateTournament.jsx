@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { saveTournament } from '../../storage/localStorage';
 import { generateTournamentId } from '../../utils/idGenerator';
+import './CreateTournament.css';
 
 function CreateTournament() {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ function CreateTournament() {
   const [venue, setVenue] = useState('');
   const [error, setError] = useState('');
   const [creating, setCreating] = useState(false);
+  const [touched, setTouched] = useState({ name: false, venue: false });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,15 +50,73 @@ function CreateTournament() {
     }
   };
 
+  const handleCancel = () => {
+    navigate('/dashboard');
+  };
+
   return (
-    <div className="row justify-content-center">
-      <div className="col-md-8 col-lg-6">
-        <div className="card shadow">
-          <div className="card-body p-5">
-            <h2 className="card-title mb-4">
-              <i className="bi bi-plus-circle me-2"></i>
-              Create New Tournament
-            </h2>
+    <div className="create-tournament-container">
+      <div className="create-tournament-layout">
+        {/* Left Column - Context */}
+        <div className="create-tournament-intro">
+          <div className="intro-header">
+            <div className="intro-icon">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="32" r="28" fill="#E6F2FF"/>
+                <circle cx="32" cy="32" r="20" fill="#0969DA" opacity="0.2"/>
+                <circle cx="32" cy="32" r="12" fill="#0969DA" opacity="0.4"/>
+                <circle cx="32" cy="32" r="6" fill="#0969DA"/>
+              </svg>
+            </div>
+            <h1 className="intro-title">Create a Tournament</h1>
+          </div>
+          
+          <p className="intro-description">
+            Set up a new tournament to organize your archery competition. Configure teams, define shooting order, and track scores automatically.
+          </p>
+          
+          <div className="intro-features">
+            <div className="feature-item">
+              <div className="feature-icon">
+                <i className="bi bi-people"></i>
+              </div>
+              <div className="feature-text">
+                <div className="feature-title">Register Teams</div>
+                <div className="feature-desc">Add participating teams with two archers each</div>
+              </div>
+            </div>
+            
+            <div className="feature-item">
+              <div className="feature-icon">
+                <i className="bi bi-list-ol"></i>
+              </div>
+              <div className="feature-text">
+                <div className="feature-title">Configure Order</div>
+                <div className="feature-desc">Set the shooting sequence for all archers</div>
+              </div>
+            </div>
+            
+            <div className="feature-item">
+              <div className="feature-icon">
+                <i className="bi bi-trophy"></i>
+              </div>
+              <div className="feature-text">
+                <div className="feature-title">Track Progress</div>
+                <div className="feature-desc">Monitor scores and determine winners automatically</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column - Form */}
+        <div className="create-tournament-form-container">
+          <div className="form-card">
+            <div className="form-card-header">
+              <h2 className="form-card-title">Tournament Details</h2>
+              <p className="form-card-description">
+                Enter the basic information to get started
+              </p>
+            </div>
 
             {error && (
               <div className="alert alert-danger" role="alert">
@@ -65,34 +125,40 @@ function CreateTournament() {
               </div>
             )}
 
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="name" className="form-label fw-bold">
-                  Tournament Name *
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="form-group">
+                <label htmlFor="name" className="form-label">
+                  Tournament Name <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
-                  className="form-control form-control-lg"
+                  className={`form-control ${touched.name && !name.trim() ? 'is-invalid' : ''}`}
                   id="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  onBlur={() => setTouched({ ...touched, name: true })}
                   placeholder="e.g., National Championship 2026"
                   maxLength={100}
                   required
                   autoFocus
                 />
-                <div className="form-text">
-                  {name.length}/100 characters
+                <div className="form-text d-flex justify-content-between">
+                  <span>
+                    {touched.name && !name.trim() ? 'Tournament name is required' : 'Required'}
+                  </span>
+                  <span className={name.length >= 90 ? 'text-warning-light' : ''}>
+                    {name.length}/100
+                  </span>
                 </div>
               </div>
 
-              <div className="mb-4">
-                <label htmlFor="venue" className="form-label fw-bold">
-                  Venue/Location
+              <div className="form-group">
+                <label htmlFor="venue" className="form-label">
+                  Venue / Location
                 </label>
                 <input
                   type="text"
-                  className="form-control form-control-lg"
+                  className="form-control"
                   id="venue"
                   value={venue}
                   onChange={(e) => setVenue(e.target.value)}
@@ -100,15 +166,23 @@ function CreateTournament() {
                   maxLength={100}
                 />
                 <div className="form-text">
-                  Optional
+                  <span>Optional</span>
                 </div>
               </div>
 
-              <div className="d-flex gap-3">
+              <div className="form-actions">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleCancel}
+                  disabled={creating}
+                >
+                  Cancel
+                </button>
                 <button
                   type="submit"
-                  className="btn btn-primary btn-lg flex-grow-1"
-                  disabled={creating}
+                  className="btn btn-primary"
+                  disabled={creating || !name.trim()}
                 >
                   {creating ? (
                     <>
@@ -118,18 +192,9 @@ function CreateTournament() {
                   ) : (
                     <>
                       <i className="bi bi-check-circle me-2"></i>
-                      Create Tournament
+                      Create
                     </>
                   )}
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary btn-lg"
-                  onClick={() => navigate('/')}
-                  disabled={creating}
-                >
-                  Cancel
                 </button>
               </div>
             </form>

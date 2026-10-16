@@ -37,7 +37,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--light-color);
+  background-color: #2a2f38;
 }
 
 code {
@@ -58,10 +58,12 @@ code {
 
 /* Header */
 .app-header {
-  background: linear-gradient(135deg, var(--dark-color) 0%, #495057 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0.3) 65%, transparent 100%);
   color: white;
   padding: var(--spacing-lg) 0;
-  box-shadow: var(--box-shadow);
+  box-shadow: none;
+  position: relative;
+  z-index: 10;
 }
 
 .app-header h1 {
