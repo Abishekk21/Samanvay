@@ -1,0 +1,69 @@
+/* Page Transition Curtain - Premium diagonal wipe effect */
+
+/* Import Tilt Warp font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap');
+
+.page-content-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 1;
+}
+
+.page-transition-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.97) 0%,
+    rgba(26, 26, 26, 0.95) 50%,
+    rgba(0, 0, 0, 0.97) 100%
+  );
+  will-change: clip-path;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Centered text on curtain */
+.curtain-text {
+  font-family: 'Tilt Warp', sans-serif;
+  font-size: 4.625rem; /* 4rem (64px) + 10px = 74px = 4.625rem */
+  font-weight: 400;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-align: center;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  padding: 0 2rem;
+  line-height: 1.2;
+}
+
+/* Responsive text sizing */
+@media (max-width: 768px) {
+  .curtain-text {
+    font-size: 3.125rem; /* 2.5rem (40px) + 10px = 50px = 3.125rem */
+    letter-spacing: 0.1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .curtain-text {
+    font-size: 2.625rem; /* 2rem (32px) + 10px = 42px = 2.625rem */
+    letter-spacing: 0.08em;
+  }
+}
+
+/* Ensure smooth animations */
+@media (prefers-reduced-motion: reduce) {
+  .page-transition-curtain {
+    transition: opacity 0.3s ease;
+  }
+}
+
+/* Prevent scrollbar during transition */
+body.transitioning {
+  overflow: hidden;
+}

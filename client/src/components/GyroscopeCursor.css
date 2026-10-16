@@ -1,0 +1,71 @@
+.gyroscope-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--cursor-size, 24px);
+  height: var(--cursor-size, 24px);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: transform;
+  color: var(--cursor-color, #ffffff);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.gyroscope-cursor.visible {
+  opacity: var(--cursor-opacity, 0.9);
+}
+
+.gyroscope-cursor svg {
+  display: block;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-trail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--cursor-size, 24px) * 1.5);
+  height: calc(var(--cursor-size, 24px) * 1.5);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--cursor-color, #ffffff) 0%, transparent 70%);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* Hide default cursor on elements */
+body.custom-cursor,
+body.custom-cursor * {
+  cursor: none !important;
+}
+
+/* Show default cursor on interactive elements when hovering */
+body.custom-cursor a:hover,
+body.custom-cursor button:hover,
+body.custom-cursor input:hover,
+body.custom-cursor textarea:hover,
+body.custom-cursor select:hover {
+  cursor: pointer !important;
+}
+
+/* Smooth animation */
+@media (prefers-reduced-motion: no-preference) {
+  .gyroscope-cursor {
+    transition: opacity 0.3s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gyroscope-cursor {
+    display: none;
+  }
+}
+
+/* Hide on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .gyroscope-cursor {
+    display: none !important;
+  }
+}

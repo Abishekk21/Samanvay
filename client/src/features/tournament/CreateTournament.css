@@ -1,0 +1,490 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Warp&family=Sora:wght@400;500;600;700;800&display=swap');
+
+/* Create Tournament Container */
+.create-tournament-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+}
+
+.create-tournament-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  width: 100%;
+  align-items: center;
+}
+
+/* Left Column - Introduction */
+.create-tournament-intro {
+  padding: 2rem 1rem;
+}
+
+.intro-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.intro-icon {
+  flex-shrink: 0;
+}
+
+.intro-icon svg {
+  display: block;
+}
+
+.intro-title {
+  font-family: 'Tilt Warp', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.intro-description {
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 2rem 0;
+  line-height: 1.6;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.intro-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.feature-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #000000 0%, #0a1628 50%, #000814 100%);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(59, 130, 246, 0.15);
+}
+
+.feature-text {
+  flex: 1;
+}
+
+.feature-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+  line-height: 1.4;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.feature-desc {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Right Column - Form */
+.create-tournament-form-container {
+  padding: 1rem;
+}
+
+.form-card {
+  background: linear-gradient(135deg, #000000 0%, #0a1628 50%, #000814 100%);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 1rem;
+  padding: 3rem; /* Increased padding */
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(59, 130, 246, 0.2),
+    inset 0 1px 0 rgba(59, 130, 246, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: floatAnimation 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes floatAnimation {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-20px, -20px) scale(1.2);
+    opacity: 0.9;
+  }
+}
+
+.form-card-header {
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.form-card-title {
+  font-family: 'Tilt Warp', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.form-card-description {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  line-height: 1.5;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+  max-width: 85%; /* Reduced input width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-label {
+  font-family: 'Sora', sans-serif;
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 0.5rem;
+  transition: all 0.15s ease;
+}
+
+.form-control:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.7);
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-control.is-invalid {
+  border-color: rgba(220, 53, 69, 0.6);
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+.form-text {
+  font-family: 'Sora', sans-serif;
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.form-text .text-warning-light {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.form-control.is-invalid {
+  border-color: rgba(220, 53, 69, 0.6);
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(59, 130, 246, 0.3);
+  position: relative;
+  z-index: 1;
+  max-width: 70%; /* Reduced button width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-actions .btn {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-actions .btn-primary {
+  background: linear-gradient(135deg, #0a1628 0%, #000814 50%, #000000 100%);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #ffffff;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(59, 130, 246, 0.2),
+    inset 0 1px 0 rgba(59, 130, 246, 0.2);
+}
+
+.form-actions .btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.form-actions .btn-primary:hover::before {
+  left: 100%;
+}
+
+.form-actions .btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #0d1f3d 0%, #001020 50%, #000000 100%);
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 
+    0 8px 20px rgba(59, 130, 246, 0.3),
+    0 0 24px rgba(59, 130, 246, 0.2),
+    inset 0 1px 0 rgba(59, 130, 246, 0.3);
+}
+
+.form-actions .btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-actions .btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.form-actions .btn-secondary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .create-tournament-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .create-tournament-intro {
+    padding: 1rem;
+  }
+
+  .intro-title {
+    font-size: 2rem;
+  }
+
+  .intro-features {
+    gap: 1.25rem;
+  }
+
+  .create-tournament-form-container {
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .create-tournament-container {
+    padding: 1.5rem 0;
+    min-height: auto;
+  }
+
+  .create-tournament-layout {
+    gap: 2rem;
+  }
+
+  .intro-icon {
+    margin-bottom: 1.5rem;
+  }
+
+  .intro-icon svg {
+    width: 56px;
+    height: 56px;
+  }
+
+  .intro-title {
+    font-size: 1.75rem;
+  }
+
+  .intro-description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.125rem;
+  }
+
+  .feature-title {
+    font-size: 0.9375rem;
+  }
+
+  .feature-desc {
+    font-size: 0.875rem;
+  }
+
+  .form-card {
+    padding: 1.5rem;
+  }
+
+  .form-card-title {
+    font-size: 1.25rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .intro-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .intro-title {
+    font-size: 1.5rem;
+  }
+
+  .intro-description {
+    font-size: 0.9375rem;
+  }
+
+  .intro-features {
+    gap: 1rem;
+  }
+
+  .form-card {
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+  }
+
+  .form-card-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* Animation */
+@media (prefers-reduced-motion: no-preference) {
+  .create-tournament-intro {
+    animation: slideInLeft 0.4s ease-out;
+  }
+
+  .form-card {
+    animation: slideInRight 0.4s ease-out;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
