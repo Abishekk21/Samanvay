@@ -1,0 +1,180 @@
+.archery-illustration {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+  height: 300px;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Archer container */
+.archery-illustration .archer {
+  position: absolute;
+  bottom: 20px;
+  right: 220px;
+  width: 120px;
+  height: 150px;
+  animation: archerEntry 1s ease-out;
+}
+
+/* Target container */
+.archery-illustration .target {
+  position: absolute;
+  bottom: 60px;
+  right: 20px;
+  width: 140px;
+  height: 140px;
+  animation: targetEntry 1s ease-out 0.3s backwards;
+}
+
+/* Archer entry animation - slides in from right */
+@keyframes archerEntry {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Target entry animation - grows and fades in */
+@keyframes targetEntry {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Bow drawing animation */
+.archer .bow-string {
+  animation: bowDraw 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes bowDraw {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Arrow subtle movement */
+.archer .arrow {
+  animation: arrowReady 2s ease-in-out infinite;
+}
+
+@keyframes arrowReady {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-3px);
+  }
+}
+
+/* Archer breathing animation */
+.archer .archer-body {
+  animation: archerBreath 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes archerBreath {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Target gentle rotation */
+.target svg {
+  animation: targetFloat 8s ease-in-out infinite;
+}
+
+@keyframes targetFloat {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .archery-illustration {
+    width: 300px;
+    height: 220px;
+  }
+  
+  .archery-illustration .archer {
+    width: 90px;
+    height: 110px;
+    right: 160px;
+    bottom: 15px;
+  }
+  
+  .archery-illustration .target {
+    width: 100px;
+    height: 100px;
+    right: 15px;
+    bottom: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .archery-illustration {
+    width: 200px;
+    height: 160px;
+  }
+  
+  .archery-illustration .archer {
+    width: 70px;
+    height: 90px;
+    right: 110px;
+    bottom: 10px;
+  }
+  
+  .archery-illustration .target {
+    width: 80px;
+    height: 80px;
+    right: 10px;
+    bottom: 30px;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .archery-illustration .archer,
+  .archery-illustration .target {
+    animation: none;
+  }
+  
+  .archer .bow-string,
+  .archer .arrow,
+  .archer .archer-body,
+  .target svg {
+    animation: none;
+  }
+  
+  .archery-illustration .archer {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .archery-illustration .target {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
