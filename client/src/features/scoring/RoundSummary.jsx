@@ -52,18 +52,17 @@ function RoundSummary({ round, tournament }) {
                 </div>
               </div>
 
-              {result.bonus > 0 && (
-                <div className="alert alert-success mb-3">
-                  <i className="bi bi-star-fill me-2"></i>
-                  <strong>Synchrony Bonus:</strong> +{result.bonus} pts
-                </div>
-              )}
-
               <hr />
 
               <div className="d-flex justify-content-between align-items-center">
                 <span className="fw-bold">Round Total:</span>
-                <span className="fs-4 fw-bold text-primary">{result.totalWithBonus} pts</span>
+                <div className="text-end">
+                  <div className="fs-4 fw-bold text-primary">{result.totalWithBonus} pts</div>
+                  <small className="text-success" style={{ fontSize: '0.75rem', display: 'block' }}>
+                    <i className="bi bi-star-fill me-1"></i>
+                    Synchrony Bonus: +{result.bonus} pts
+                  </small>
+                </div>
               </div>
             </div>
           </div>

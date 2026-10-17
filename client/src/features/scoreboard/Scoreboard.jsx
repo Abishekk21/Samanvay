@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useTournament } from '../../hooks/useTournament';
+import './Scoreboard.css';
 
 function Scoreboard() {
   const { tournamentId } = useParams();
@@ -93,44 +94,44 @@ function Scoreboard() {
   const completedRounds = tournament.rounds?.filter(r => r.status === 'completed').length || 0;
 
   return (
-    <div>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <div>
-          <h2>
-            <i className="bi bi-bar-chart me-2"></i>
-            Live Scoreboard
-          </h2>
-          <h4 className="text-muted">{tournament.name}</h4>
-        </div>
-        <div>
-          {tournament.status === 'active' && (
-            <Link 
-              to={`/shooting/${tournament.id}`}
-              className="btn btn-primary btn-lg"
-            >
-              <i className="bi bi-bullseye me-2"></i>
-              Shooting Desk
-            </Link>
-          )}
-          {tournament.status === 'completed' && (
-            <Link 
-              to={`/results/${tournament.id}`}
-              className="btn btn-success btn-lg"
-            >
-              <i className="bi bi-trophy me-2"></i>
-              Final Results
-            </Link>
-          )}
-        </div>
-      </div>
+    <div className="scoreboard-container">
+      <div className="scoreboard-content">
+        <div className="scoreboard-card">
+          <div className="scoreboard-header">
+            <div>
+              <h2 className="scoreboard-title">
+                <i className="bi bi-bar-chart me-2"></i>
+                Live Scoreboard
+              </h2>
+              <h4 className="scoreboard-subtitle">{tournament.name}</h4>
+            </div>
+            <div>
+              {tournament.status === 'active' && (
+                <Link 
+                  to={`/shooting/${tournament.id}`}
+                  className="btn btn-primary btn-lg"
+                >
+                  <i className="bi bi-bullseye me-2"></i>
+                  Shooting Desk
+                </Link>
+              )}
+              {tournament.status === 'completed' && (
+                <Link 
+                  to={`/results/${tournament.id}`}
+                  className="btn btn-success btn-lg"
+                >
+                  <i className="bi bi-trophy me-2"></i>
+                  Final Results
+                </Link>
+              )}
+            </div>
+          </div>
 
-      {/* Summary Cards */}
-      <div className="row mb-4">
-        <div className="col-md-3">
-          <div className="card text-center">
-            <div className="card-body">
-              <h5 className="card-title text-muted">Status</h5>
-              <p className="fs-4 fw-bold mb-0">
+          {/* Summary Cards */}
+          <div className="summary-cards">
+            <div className="summary-card">
+              <h5 className="summary-card-title">Status</h5>
+              <p className="summary-card-value">
                 {tournament.status === 'completed' ? (
                   <span className="text-success">Completed</span>
                 ) : (
@@ -138,96 +139,84 @@ function Scoreboard() {
                 )}
               </p>
             </div>
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="card text-center">
-            <div className="card-body">
-              <h5 className="card-title text-muted">Teams</h5>
-              <p className="fs-4 fw-bold mb-0">{tournament.teams.length}</p>
+            <div className="summary-card">
+              <h5 className="summary-card-title">Teams</h5>
+              <p className="summary-card-value">{tournament.teams.length}</p>
+            </div>
+            <div className="summary-card">
+              <h5 className="summary-card-title">Leading Team</h5>
+              <p className="summary-card-value" style={{ fontSize: '1.25rem' }}>{leader.teamName}</p>
+            </div>
+            <div className="summary-card">
+              <h5 className="summary-card-title">Points to Win</h5>
+              <p className="summary-card-value">{leader.pointsToWin}</p>
             </div>
           </div>
-        </div>
-        <div className="col-md-3">
-          <div className="card text-center">
-            <div className="card-body">
-              <h5 className="card-title text-muted">Leading Team</h5>
-              <p className="fs-6 fw-bold mb-0">{leader.teamName}</p>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="card text-center">
-            <div className="card-body">
-              <h5 className="card-title text-muted">Points to Win</h5>
-              <p className="fs-4 fw-bold mb-0">{leader.pointsToWin}</p>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Standings Table */}
-      <div className="standings-table">
-        <table className="table table-hover mb-0">
-          <thead>
-            <tr>
-              <th width="60">Rank</th>
-              <th>Team</th>
-              <th>Archer 1</th>
-              <th className="text-end">Score</th>
-              <th>Archer 2</th>
-              <th className="text-end">Score</th>
-              <th className="text-end">Bonus</th>
-              <th className="text-end">Total</th>
-              <th className="text-end">To Win</th>
-            </tr>
-          </thead>
-          <tbody>
-            {standings.map(standing => (
-              <tr 
-                key={standing.teamId}
-                className={
-                  standing.rank === 1 && tournament.status === 'active' ? 'leader-row' :
-                  standing.rank === 1 && tournament.status === 'completed' ? 'winner-row' : ''
-                }
+          {/* Standings Table */}
+          <div className="standings-table">
+            <table className="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Team</th>
+                  <th>Archer 1</th>
+                  <th>Score</th>
+                  <th>Archer 2</th>
+                  <th>Score</th>
+                  <th>Bonus</th>
+                  <th>Total</th>
+                  <th>To Win</th>
+                </tr>
+              </thead>
+              <tbody>
+                {standings.map(standing => (
+                  <tr 
+                    key={standing.teamId}
+                    className={
+                      standing.rank === 1 && tournament.status === 'active' ? 'leader-row' :
+                      standing.rank === 1 && tournament.status === 'completed' ? 'winner-row' : ''
+                    }
+                  >
+                    <td className="rank-cell">{standing.rank}</td>
+                    <td className="fw-bold">{standing.teamName}</td>
+                    <td>{standing.archer1Name}</td>
+                    <td>{standing.archer1Score}</td>
+                    <td>{standing.archer2Name}</td>
+                    <td>{standing.archer2Score}</td>
+                    <td>
+                      {standing.bonusTotal > 0 && (
+                        <span className="badge bg-success">+{standing.bonusTotal}</span>
+                      )}
+                    </td>
+                    <td className="fw-bold fs-5">{standing.teamTotal}</td>
+                    <td className="text-muted">{standing.pointsToWin}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Links */}
+          <div className="scoreboard-actions">
+            {completedRounds > 0 && (
+              <Link 
+                to={`/history/${tournament.id}`}
+                className="btn btn-outline-secondary"
               >
-                <td className="rank-cell">{standing.rank}</td>
-                <td className="fw-bold">{standing.teamName}</td>
-                <td>{standing.archer1Name}</td>
-                <td className="text-end">{standing.archer1Score}</td>
-                <td>{standing.archer2Name}</td>
-                <td className="text-end">{standing.archer2Score}</td>
-                <td className="text-end">
-                  {standing.bonusTotal > 0 && (
-                    <span className="badge bg-success">+{standing.bonusTotal}</span>
-                  )}
-                </td>
-                <td className="text-end fw-bold fs-5">{standing.teamTotal}</td>
-                <td className="text-end text-muted">{standing.pointsToWin}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Links */}
-      <div className="mt-4 d-flex gap-3">
-        {completedRounds > 0 && (
-          <Link 
-            to={`/history/${tournament.id}`}
-            className="btn btn-outline-secondary"
-          >
-            <i className="bi bi-clock-history me-2"></i>
-            Round History
-          </Link>
-        )}
-        <button 
-          onClick={() => navigate('/')}
-          className="btn btn-outline-secondary"
-        >
-          <i className="bi bi-house-door me-2"></i>
-          Dashboard
-        </button>
+                <i className="bi bi-clock-history me-2"></i>
+                Round History
+              </Link>
+            )}
+            <button 
+              onClick={() => navigate('/')}
+              className="btn btn-outline-secondary"
+            >
+              <i className="bi bi-house-door me-2"></i>
+              Dashboard
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

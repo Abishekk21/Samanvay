@@ -6,6 +6,7 @@ import TargetSelector from './TargetSelector';
 import ActiveArcherDisplay from './ActiveArcherDisplay';
 import RoundSummary from './RoundSummary';
 import ArcheryTarget from './ArcheryTarget';
+import Swal from 'sweetalert2';
 import './ShootingDesk.css';
 
 function ShootingDesk() {
@@ -49,18 +50,21 @@ function ShootingDesk() {
   }
 
   if (tournament.status === 'completed') {
-    return (
-      <div className="alert alert-info">
-        <h4>Tournament Completed</h4>
-        <p>This tournament has finished.</p>
-        <button 
-          className="btn btn-primary"
-          onClick={() => navigate(`/results/${tournament.id}`)}
-        >
-          View Results
-        </button>
-      </div>
-    );
+    // Show SweetAlert and redirect
+    Swal.fire({
+      title: 'Tournament Completed!',
+      text: 'This tournament has finished.',
+      icon: 'success',
+      timer: 3000,
+      showConfirmButton: false,
+      timerProgressBar: true,
+      willClose: () => {
+        navigate(`/results/${tournament.id}`);
+      }
+    });
+    
+    // Return null while redirecting
+    return null;
   }
 
   // Get current archer
@@ -141,43 +145,47 @@ function ShootingDesk() {
   // Show round summary after completion
   if (roundComplete && roundSummary) {
     return (
-      <div>
-        <h2 className="mb-4">
-          <i className="bi bi-check-circle text-success me-2"></i>
-          Round {roundNumber} Complete
-        </h2>
+      <div className="round-summary-container">
+        <div className="round-summary-content">
+          <div className="round-summary-card">
+            <h2 className="round-summary-title">
+              <i className="bi bi-check-circle text-success me-2"></i>
+              Round {roundNumber} Complete
+            </h2>
 
-        <RoundSummary 
-          round={roundSummary}
-          tournament={tournament}
-        />
+            <RoundSummary 
+              round={roundSummary}
+              tournament={tournament}
+            />
 
-        <div className="d-flex gap-3 justify-content-center mt-4">
-          <button
-            className="btn btn-outline-primary btn-lg"
-            onClick={handleViewScoreboard}
-          >
-            <i className="bi bi-bar-chart me-2"></i>
-            View Scoreboard
-          </button>
+            <div className="d-flex gap-3 justify-content-center mt-4">
+              <button
+                className="btn btn-outline-primary btn-lg"
+                onClick={handleViewScoreboard}
+              >
+                <i className="bi bi-bar-chart me-2"></i>
+                View Scoreboard
+              </button>
 
-          {tournament.status === 'completed' ? (
-            <button
-              className="btn btn-success btn-lg"
-              onClick={handleViewResults}
-            >
-              <i className="bi bi-trophy me-2"></i>
-              View Final Results
-            </button>
-          ) : (
-            <button
-              className="btn btn-primary btn-lg"
-              onClick={handleStartNextRound}
-            >
-              <i className="bi bi-arrow-right-circle me-2"></i>
-              Start Round {roundNumber + 1}
-            </button>
-          )}
+              {tournament.status === 'completed' ? (
+                <button
+                  className="btn btn-success btn-lg"
+                  onClick={handleViewResults}
+                >
+                  <i className="bi bi-trophy me-2"></i>
+                  View Final Results
+                </button>
+              ) : (
+                <button
+                  className="btn btn-primary btn-lg"
+                  onClick={handleStartNextRound}
+                >
+                  <i className="bi bi-arrow-right-circle me-2"></i>
+                  Start Round {roundNumber + 1}
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     );

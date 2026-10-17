@@ -1,0 +1,237 @@
+/* Scoreboard Container */
+.scoreboard-container {
+  min-height: 100vh;
+  max-height: 100vh;
+  padding: 2rem;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scoreboard-content {
+  max-width: 70%;
+  width: 70%;
+  max-height: 95vh;
+  overflow-y: auto;
+}
+
+.scoreboard-card {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  overflow: hidden;
+}
+
+/* Header Section */
+.scoreboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.scoreboard-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.scoreboard-subtitle {
+  font-size: 1.25rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* Summary Cards */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, #1e3a8a 0%, #000000 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.summary-card-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.summary-card-value {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+/* Standings Table */
+.standings-table {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.standings-table table {
+  margin: 0;
+}
+
+.standings-table thead {
+  background: #000000 !important;
+}
+
+.standings-table thead th {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1rem;
+  border: none !important;
+  text-align: center;
+  vertical-align: middle;
+  background: #000000 !important;
+}
+
+.standings-table tbody td {
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  padding: 1rem;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.standings-table tbody tr:hover {
+  background: rgba(30, 58, 138, 0.05);
+}
+
+.standings-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Leader/Winner Row */
+.leader-row {
+  background: rgba(59, 130, 246, 0.1) !important;
+}
+
+.winner-row {
+  background: rgba(16, 185, 129, 0.1) !important;
+}
+
+.rank-cell {
+  font-weight: 800;
+  color: #1e293b;
+  font-size: 1.125rem;
+}
+
+/* Action Buttons */
+.scoreboard-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.scoreboard-actions .btn {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+}
+
+.scoreboard-actions .btn-primary {
+  background: linear-gradient(135deg, #1e3a8a 0%, #000000 100%) !important;
+  border: none !important;
+  color: #ffffff;
+}
+
+.scoreboard-actions .btn-primary:hover {
+  background: linear-gradient(135deg, #000000 0%, #1e3a8a 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.scoreboard-actions .btn-outline-secondary {
+  background: transparent;
+  border: 2px solid #64748b;
+  color: #64748b;
+}
+
+.scoreboard-actions .btn-outline-secondary:hover {
+  background: #64748b;
+  color: #ffffff;
+}
+
+/* Responsive */
+@media (min-width: 1201px) and (max-width: 1600px) {
+  .scoreboard-content {
+    max-width: 80%;
+    width: 80%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .scoreboard-content {
+    max-width: 90%;
+    width: 90%;
+  }
+
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .scoreboard-container {
+    padding: 1rem;
+  }
+
+  .scoreboard-content {
+    max-width: 95%;
+    width: 95%;
+  }
+
+  .scoreboard-card {
+    padding: 1.5rem;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .standings-table {
+    overflow-x: auto;
+  }
+}

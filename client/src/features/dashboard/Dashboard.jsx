@@ -141,12 +141,20 @@ function Dashboard() {
               Manage your tournaments, track progress, and review final results
             </p>
           </div>
-          <motion.div whileTap={buttonTap}>
-            <Link to="/create" className="btn btn-primary">
-              <i className="bi bi-plus-circle me-2"></i>
-              New Tournament
-            </Link>
-          </motion.div>
+          <div className="dashboard-header-actions">
+            <motion.div whileTap={buttonTap}>
+              <Link to="/create" className="btn btn-primary" style={{ whiteSpace: 'nowrap' }}>
+                <i className="bi bi-plus-circle me-2"></i>
+                New Tournament
+              </Link>
+            </motion.div>
+            <motion.div whileTap={buttonTap}>
+              <Link to="/tournaments" className="btn btn-outline-primary" style={{ whiteSpace: 'nowrap' }}>
+                <i className="bi bi-list-ul me-2"></i>
+                Existing Tournaments
+              </Link>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* Stats Overview - Always visible */}
@@ -268,11 +276,11 @@ function Dashboard() {
                 whileHover={cardHover.hover}
                 custom={index}
               >
-                <div className="tournament-card-icon">
-                  <i className="bi bi-bullseye"></i>
-                </div>
-                
                 <div className="tournament-card-header-premium">
+                  <div className="tournament-card-icon">
+                    <i className="bi bi-bullseye"></i>
+                  </div>
+                  
                   <div className="tournament-card-title-section">
                     <h3 className="tournament-card-title-premium">{tournament.name}</h3>
                     {getStatusBadge(tournament)}
