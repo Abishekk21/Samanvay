@@ -1,0 +1,114 @@
+/* Screen Size Restriction Overlay */
+.screen-restriction-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #1e3a8a 0%, #000000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 2rem;
+}
+
+.screen-restriction-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: 3rem;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.restriction-icon {
+  font-size: 5rem;
+  color: #1e3a8a;
+  margin-bottom: 1.5rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.restriction-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.restriction-message {
+  font-size: 1.125rem;
+  color: #475569;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.restriction-submessage {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.restriction-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #475569;
+  font-weight: 500;
+}
+
+.detail-item i {
+  font-size: 1.25rem;
+  color: #1e3a8a;
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 600px) {
+  .screen-restriction-card {
+    padding: 2rem;
+    max-width: 90%;
+  }
+
+  .restriction-icon {
+    font-size: 4rem;
+  }
+
+  .restriction-title {
+    font-size: 1.5rem;
+  }
+
+  .restriction-message {
+    font-size: 1rem;
+  }
+
+  .restriction-submessage {
+    font-size: 0.875rem;
+  }
+}

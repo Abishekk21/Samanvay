@@ -371,3 +371,27 @@ code {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+
+/* Bootstrap Container Max-Width Override - Global */
+@media (min-width: 1400px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1520px !important;
+  }
+}
+
+/* Main Content Container Override */
+.main-content .container {
+  max-width: 1520px !important;
+}
+
+@media (min-width: 1400px) {
+  .main-content .container {
+    max-width: 1520px !important;
+  }
+}

@@ -337,3 +337,16 @@ textarea:focus-visible {
   color: var(--archeville-gray);
   margin-bottom: var(--space-6);
 }
+
+
+/* Container Max-Width Override */
+@media (min-width: 1400px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1520px !important;
+  }
+}

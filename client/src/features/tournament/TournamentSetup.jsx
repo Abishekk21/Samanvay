@@ -4,6 +4,7 @@ import { useTournament } from '../../hooks/useTournament';
 import { validateTournament } from '../../services/api';
 import { setActiveTournament } from '../../storage/localStorage';
 import { generateTeamId, generateArcherId } from '../../utils/idGenerator';
+import './TournamentSetup.css';
 
 function TournamentSetup() {
   const { tournamentId } = useParams();
@@ -142,15 +143,16 @@ function TournamentSetup() {
                   tournament.shootingOrder.length > 0;
 
   return (
-    <div>
-      <div className="mb-4">
-        <h2>
-          <i className="bi bi-gear me-2"></i>
-          Tournament Setup
-        </h2>
-        <h4 className="text-muted">{tournament.name}</h4>
-        {tournament.venue && <p className="text-muted">{tournament.venue}</p>}
-      </div>
+    <div className="tournament-setup-container">
+      <div className="setup-content">
+        <div className="mb-4 page-header">
+          <h2 className="setup-title">
+            <i className="bi bi-gear me-2"></i>
+            Tournament Setup
+          </h2>
+          <h4 className="tournament-name">{tournament.name}</h4>
+          {tournament.venue && <p className="tournament-venue">{tournament.venue}</p>}
+        </div>
 
       {validationErrors.length > 0 && (
         <div className="alert alert-danger">
@@ -167,7 +169,9 @@ function TournamentSetup() {
       )}
 
       {/* Add Team Form */}
-      <div className="card shadow mb-4">
+      <div className="setup-cards-row">
+        <div className="setup-cards-left">
+          <div className="card shadow mb-4">
         <div className="card-body">
           <h5 className="card-title mb-3">
             <i className="bi bi-people-fill me-2"></i>
@@ -264,30 +268,35 @@ function TournamentSetup() {
             </div>
           )}
         </div>
-      </div>
+        </div>
+        </div>
 
-      {/* Shooting Order */}
-      {tournament.teams.length > 0 && (
-        <div className="card shadow mb-4">
-          <div className="card-body">
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <h5 className="card-title mb-0">
-                <i className="bi bi-arrow-down-up me-2"></i>
-                Shooting Order
-              </h5>
-              <button
-                className="btn btn-sm btn-outline-primary"
-                onClick={generateDefaultShootingOrder}
-              >
-                <i className="bi bi-shuffle me-1"></i>
-                Generate Default Order
-              </button>
-            </div>
-            
-            {tournament.shootingOrder.length === 0 ? (
-              <p className="text-muted">Click "Generate Default Order" to create a shooting order.</p>
-            ) : (
-              <div className="list-group">
+        {/* Right Column - Shooting Order */}
+        <div className="setup-cards-right">
+          {/* Shooting Order */}
+          <div className="card shadow mb-4">
+            <div className="card-body">
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                <h5 className="card-title mb-0">
+                  <i className="bi bi-arrow-down-up me-2"></i>
+                  Shooting Order
+                </h5>
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={generateDefaultShootingOrder}
+                  disabled={tournament.teams.length === 0}
+                >
+                  <i className="bi bi-shuffle me-1"></i>
+                  Generate
+                </button>
+              </div>
+              
+              {tournament.teams.length === 0 ? (
+                <p className="text-muted">Add teams first to generate shooting order.</p>
+              ) : tournament.shootingOrder.length === 0 ? (
+                <p className="text-muted">Click "Generate" to create a shooting order.</p>
+              ) : (
+                <div className="list-group">
                 {tournament.shootingOrder.map((archerId, index) => (
                   <div key={archerId} className="list-group-item d-flex justify-content-between align-items-center">
                     <span>
@@ -297,7 +306,6 @@ function TournamentSetup() {
                       <button
                         className="btn btn-outline-secondary"
                         onClick={() => moveArcherInOrder(archerId, 'up')}
-                        disabled={index === 0}
                         title="Move up"
                       >
                         <i className="bi bi-arrow-up"></i>
@@ -305,7 +313,6 @@ function TournamentSetup() {
                       <button
                         className="btn btn-outline-secondary"
                         onClick={() => moveArcherInOrder(archerId, 'down')}
-                        disabled={index === tournament.shootingOrder.length - 1}
                         title="Move down"
                       >
                         <i className="bi bi-arrow-down"></i>
@@ -317,7 +324,8 @@ function TournamentSetup() {
             )}
           </div>
         </div>
-      )}
+        </div>
+      </div>
 
       {/* Actions */}
       <div className="d-flex gap-3 justify-content-end">
@@ -345,6 +353,7 @@ function TournamentSetup() {
             </>
           )}
         </button>
+      </div>
       </div>
     </div>
   );

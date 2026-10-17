@@ -5,6 +5,8 @@ import { completeRound } from '../../services/api';
 import TargetSelector from './TargetSelector';
 import ActiveArcherDisplay from './ActiveArcherDisplay';
 import RoundSummary from './RoundSummary';
+import ArcheryTarget from './ArcheryTarget';
+import './ShootingDesk.css';
 
 function ShootingDesk() {
   const { tournamentId } = useParams();
@@ -13,8 +15,6 @@ function ShootingDesk() {
   
   const [currentShotIndex, setCurrentShotIndex] = useState(0);
   const [roundShots, setRoundShots] = useState([]);
-  const [selectedCircle, setSelectedCircle] = useState(null);
-  const [confirming, setConfirming] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [roundComplete, setRoundComplete] = useState(false);
   const [roundSummary, setRoundSummary] = useState(null);
@@ -72,28 +72,21 @@ function ShootingDesk() {
   const totalArchers = tournament.shootingOrder.length;
   const roundNumber = tournament.currentRound || 1;
 
-  const handleCircleSelect = (circle) => {
-    setSelectedCircle(circle);
-    setConfirming(true);
-  };
-
-  const handleConfirmShot = async () => {
-    if (!selectedCircle || !currentArcher) {
+  const handleCircleSelect = async (circle) => {
+    if (!currentArcher) {
       return;
     }
 
     setApiError(null);
 
-    // Add shot to round
+    // Add shot to round immediately
     const shot = {
       archerId: currentArcher.id,
-      circle: selectedCircle
+      circle: circle
     };
 
     const updatedRoundShots = [...roundShots, shot];
     setRoundShots(updatedRoundShots);
-    setSelectedCircle(null);
-    setConfirming(false);
 
     // Check if round is complete
     if (updatedRoundShots.length === totalArchers) {
@@ -102,11 +95,6 @@ function ShootingDesk() {
       // Move to next archer
       setCurrentShotIndex(currentShotIndex + 1);
     }
-  };
-
-  const handleCancelShot = () => {
-    setSelectedCircle(null);
-    setConfirming(false);
   };
 
   const submitRound = async (shots) => {
@@ -207,85 +195,122 @@ function ShootingDesk() {
   }
 
   return (
-    <div>
-      <div className="mb-4">
-        <h2>
-          <i className="bi bi-bullseye me-2"></i>
-          {tournament.name} - Round {roundNumber}
-        </h2>
-        
-        <div className="progress-bar-wrapper">
-          <div className="progress">
-            <div 
-              className="progress-bar bg-success" 
-              role="progressbar" 
-              style={{ width: `${(roundShots.length / totalArchers) * 100}%` }}
-            >
-              {roundShots.length} / {totalArchers} shots
+    <div className="shooting-desk-container">
+      <div className="shooting-desk-content">
+        <div className="shooting-desk-card">
+          <div className="shooting-layout">
+            {/* Left Panel - Info */}
+            <div className="shooting-info-panel">
+              <div className="shooting-info-header">
+                <h1 className="shooting-info-title">
+                  <i className="bi bi-bullseye me-2"></i>
+                  {tournament.name}
+                </h1>
+                <p className="shooting-info-subtitle">Round {roundNumber} in Progress</p>
+              </div>
+
+              {currentArcher && (
+                <>
+                  <div className="info-section">
+                    <div className="info-label">Round</div>
+                    <div className="info-value-large">{String(roundNumber).padStart(2, '0')}</div>
+                  </div>
+
+                  <div className="info-section">
+                    <div className="info-label">Current Shooter</div>
+                    <div className="info-value">{currentArcher.name}</div>
+                    <div className="info-meta" style={{ display: 'none' }}>
+                      <i className="bi bi-people-fill me-2"></i>
+                      {currentArcher.teamName}
+                    </div>
+                  </div>
+
+                  <div className="info-section">
+                    <div className="info-label">Position</div>
+                    <div className="info-value">
+                      {currentShotIndex + 1}/{totalArchers}
+                    </div>
+                  </div>
+
+                  <div className="info-section">
+                    <div className="info-label">Team Score</div>
+                    <div className="info-value">
+                      <span className="score-number">
+                      {(() => {
+                        const team = tournament.teams.find(t => t.id === currentArcher.teamId);
+                        let total = 0;
+                        if (tournament.rounds) {
+                          for (const round of tournament.rounds) {
+                            if (round.status === 'completed' && round.shots) {
+                              for (const shot of round.shots) {
+                                const shotArcher = team.archers.find(a => a.id === shot.archerId);
+                                if (shotArcher) {
+                                  total += shot.points;
+                                }
+                              }
+                            }
+                            if (round.status === 'completed' && round.bonuses) {
+                              const teamBonus = round.bonuses.find(b => b.teamId === team.id);
+                              if (teamBonus) {
+                                total += teamBonus.bonus;
+                              }
+                            }
+                          }
+                        }
+                        return total;
+                      })()}
+                      </span>
+                      {" "}
+                      <span className="score-unit">pts</span>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              <div className="shooting-progress">
+                <div className="progress-label">Round Progress</div>
+                <div className="progress">
+                  <div 
+                    className="progress-bar" 
+                    role="progressbar" 
+                    style={{ width: `${(roundShots.length / totalArchers) * 100}%` }}
+                  >
+                    {roundShots.length} / {totalArchers}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Panel - Target Board */}
+            <div className="shooting-target-panel">
+              {/* Decorative clouds */}
+              <div className="cloud cloud-1"></div>
+              <div className="cloud cloud-2"></div>
+              <div className="cloud cloud-3"></div>
+              
+              <h3 className="target-instruction">Click on the target to record shot</h3>
+              <ArcheryTarget
+                roundNumber={roundNumber}
+                onSelect={handleCircleSelect}
+                confirming={false}
+                selectedCircle={null}
+              />
             </div>
           </div>
         </div>
+
+        {apiError && (
+          <div className="alert alert-danger alert-dismissible fade show mt-3">
+            <i className="bi bi-exclamation-triangle me-2"></i>
+            {apiError}
+            <button 
+              type="button" 
+              className="btn-close" 
+              onClick={() => setApiError(null)}
+            ></button>
+          </div>
+        )}
       </div>
-
-      {apiError && (
-        <div className="alert alert-danger alert-dismissible fade show">
-          <i className="bi bi-exclamation-triangle me-2"></i>
-          {apiError}
-          <button 
-            type="button" 
-            className="btn-close" 
-            onClick={() => setApiError(null)}
-          ></button>
-        </div>
-      )}
-
-      {currentArcher && (
-        <ActiveArcherDisplay
-          archer={currentArcher}
-          position={currentShotIndex + 1}
-          total={totalArchers}
-          roundNumber={roundNumber}
-          tournament={tournament}
-        />
-      )}
-
-      {!confirming ? (
-        <>
-          <h4 className="mb-3 text-center">Select Target Circle</h4>
-          <TargetSelector
-            roundNumber={roundNumber}
-            onSelect={handleCircleSelect}
-          />
-        </>
-      ) : (
-        <div className="card shadow-lg">
-          <div className="card-body text-center p-5">
-            <h3 className="mb-4">
-              <i className="bi bi-question-circle text-warning me-2"></i>
-              Confirm Shot
-            </h3>
-            <p className="lead mb-4">
-              <strong>{currentArcher.name}</strong> hit circle <strong className="fs-2">{selectedCircle}</strong>?
-            </p>
-            <div className="d-flex gap-3 justify-content-center">
-              <button
-                className="btn btn-lg btn-outline-secondary"
-                onClick={handleCancelShot}
-              >
-                <i className="bi bi-x-circle me-2"></i>
-                Cancel
-              </button>
-              <button
-                className="btn btn-lg btn-success"
-                onClick={handleConfirmShot}
-              >
-                <i className="bi bi-check-circle me-2"></i>
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

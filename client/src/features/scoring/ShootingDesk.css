@@ -1,0 +1,985 @@
+/* Shooting Desk Styles */
+
+.shooting-desk-container {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.shooting-desk-content {
+  max-width: 95%;
+  width: 95%;
+  margin: 0 auto;
+}
+
+/* Main Card with Split Layout */
+.shooting-desk-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  min-height: 80vh;
+}
+
+.shooting-layout {
+  display: grid;
+  grid-template-columns: 40fr 60fr;
+  gap: 0;
+  min-height: 80vh;
+}
+
+/* Left Side - Info Panel */
+.shooting-info-panel {
+  background: linear-gradient(135deg, #1e3a8a 0%, #000000 100%);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  border-right: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.shooting-info-header {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.shooting-info-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+}
+
+.shooting-info-subtitle {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.2;
+}
+
+/* Info Sections */
+.info-section {
+  margin-bottom: 2rem;
+}
+
+.info-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+}
+
+.info-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.score-number {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #ffd700;
+}
+
+.score-unit {
+  font-size: 1rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.info-value-large {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #ffd700;
+}
+
+.info-meta {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 0.5rem;
+}
+
+/* Progress Section */
+.shooting-progress {
+  margin-top: auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.progress-label {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.75rem;
+}
+
+.progress {
+  height: 3rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #ffd700 0%, #ffed4e 100%);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Right Side - Target Board */
+.shooting-target-panel {
+  background: linear-gradient(180deg, #87CEEB 0%, #B0E5FC 50%, #90EE90 100%);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cartoon Background Elements */
+.shooting-target-panel::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, #90EE90 0%, #7FCD7F 50%, #6BAA6B 100%);
+  z-index: 0;
+}
+
+/* Clouds */
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 100px;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: white;
+  border-radius: 100px;
+}
+
+.cloud-1 {
+  width: 120px;
+  height: 40px;
+  top: 10%;
+  left: 10%;
+  animation: float 20s infinite ease-in-out;
+}
+
+.cloud-1::before {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 15px;
+}
+
+.cloud-1::after {
+  width: 60px;
+  height: 35px;
+  top: -15px;
+  right: 15px;
+}
+
+.cloud-2 {
+  width: 100px;
+  height: 35px;
+  top: 20%;
+  right: 15%;
+  animation: float 25s infinite ease-in-out 5s;
+}
+
+.cloud-2::before {
+  width: 45px;
+  height: 45px;
+  top: -20px;
+  left: 10px;
+}
+
+.cloud-2::after {
+  width: 50px;
+  height: 30px;
+  top: -12px;
+  right: 10px;
+}
+
+.cloud-3 {
+  width: 90px;
+  height: 30px;
+  top: 35%;
+  left: 70%;
+  animation: float 22s infinite ease-in-out 10s;
+}
+
+.cloud-3::before {
+  width: 40px;
+  height: 40px;
+  top: -18px;
+  left: 12px;
+}
+
+.cloud-3::after {
+  width: 45px;
+  height: 28px;
+  top: -10px;
+  right: 12px;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.target-instruction {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+/* Archery Target Board */
+.archery-target-board {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  cursor: crosshair;
+  z-index: 10;
+}
+
+/* Target Stand - Tripod Style */
+.target-stand {
+  position: relative;
+  width: 400px;
+  height: 160px;
+  margin: -80px auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 9;
+}
+
+.stand-leg {
+  position: absolute;
+  width: 65px;
+  border-radius: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform-origin: center top;
+}
+
+.stand-leg::after {
+  content: '';
+  position: absolute;
+  top: 25px;
+  left: 16px;
+  right: 16px;
+  height: 65px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+  border-radius: 40px;
+}
+
+/* Center leg - darker, straight down behind target - SHORTER */
+.stand-leg-center {
+  left: 50%;
+  top: 0;
+  height: 145px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #6b5744 0%, #5a4a38 100%);
+  width: 60px;
+  z-index: 1;
+}
+
+/* Left leg - lighter, angled from center to bottom-left */
+.stand-leg-left {
+  left: 70%;
+  top: 0;
+  height: 225px;
+  background: linear-gradient(135deg, #d4a574 0%, #b8935f 100%);
+  transform: translateX(-50%) translateX(-32px) rotate(-30deg);
+  transform-origin: top center;
+  z-index: 3;
+}
+
+/* Right leg - lighter, angled from center to bottom-right */
+.stand-leg-right {
+  left: 30%;
+  top: 0;
+  height: 225px;
+  background: linear-gradient(225deg, #d4a574 0%, #b8935f 100%);
+  transform: translateX(-50%) translateX(32px) rotate(30deg);
+  transform-origin: top center;
+  z-index: 3;
+}
+
+.target-ring {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Target Rings - From Center Outward */
+.ring-A {
+  width: 80px;
+  height: 80px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #ffd700 0%, #ffed4e 100%);
+  border: 3px solid #d4af37;
+  z-index: 6;
+}
+
+.ring-B {
+  width: 160px;
+  height: 160px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #dc3545 0%, #c82333 100%);
+  border: 3px solid #a71d2a;
+  z-index: 5;
+}
+
+.ring-C {
+  width: 240px;
+  height: 240px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #0066cc 0%, #0052a3 100%);
+  border: 3px solid #003d7a;
+  z-index: 4;
+}
+
+.ring-D {
+  width: 320px;
+  height: 320px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #212529 0%, #343a40 100%);
+  border: 3px solid #000000;
+  z-index: 3;
+}
+
+.ring-E {
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #ffffff 0%, #e9ecef 100%);
+  border: 3px solid #adb5bd;
+  z-index: 2;
+}
+
+.ring-F {
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #6c757d;
+  z-index: 1;
+}
+
+/* Ring Label & Points */
+.ring-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  font-family: 'Sora', sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.ring-A .ring-info {
+  color: #000000;
+}
+
+.ring-B .ring-info,
+.ring-C .ring-info,
+.ring-D .ring-info {
+  color: #ffffff;
+}
+
+.ring-E .ring-info {
+  color: #212529;
+}
+
+.ring-label {
+  font-size: 2rem;
+  font-weight: 900;
+  display: block;
+  line-height: 1;
+}
+
+.ring-points {
+  font-size: 2rem;
+  font-weight: 900;
+  display: block;
+  line-height: 1;
+}
+
+.ring-A .ring-points {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #000000;
+}
+
+/* 4-Sided Ring Edge Labels */
+.ring-edge-label {
+  position: absolute;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 800;
+  pointer-events: none;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Top position */
+.ring-edge-top {
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Right position */
+.ring-edge-right {
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+}
+
+/* Bottom position */
+.ring-edge-bottom {
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Left position */
+.ring-edge-left {
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+}
+
+/* Default colors for edge labels */
+.ring-B .ring-edge-label,
+.ring-C .ring-edge-label {
+  color: #ffffff;
+}
+
+.ring-E .ring-edge-label {
+  color: #212529;
+}
+
+/* Ring D needs white text for visibility on dark background */
+.ring-D .ring-edge-label {
+  color: #ffffff !important;
+}
+
+/* Arrow Marker */
+.arrow-marker {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  animation: arrowAppear 0.4s ease-out;
+}
+
+@keyframes arrowAppear {
+  0% {
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+.arrow-marker svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Confirmation Modal */
+.shooting-confirmation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  min-width: 400px;
+  text-align: center;
+}
+
+.confirmation-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.confirmation-text {
+  font-size: 1.25rem;
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+.confirmation-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.confirmation-buttons .btn {
+  min-width: 120px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+}
+
+/* Responsive */
+
+/* Laptop Screen - Reduce card size to prevent scrolling */
+@media (min-width: 1201px) and (max-width: 1600px) {
+  .shooting-desk-container {
+    padding: 0.5rem;
+      
+  }
+
+  .shooting-desk-content {
+    max-width: 85%;
+    width: 85%;
+  }
+
+  .shooting-desk-card {
+    min-height: 75vh !important;
+    max-height: 75vh !important;
+  }
+
+  .shooting-layout {
+    min-height: 75vh !important;
+    max-height: 75vh !important;
+  }
+
+  .shooting-info-panel,
+  .shooting-target-panel {
+    padding: 1.5rem !important;
+    overflow: hidden !important;
+  }
+
+  .shooting-target-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    padding-top: 1rem !important;
+  }
+
+  .shooting-info-title {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.25rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .shooting-info-subtitle {
+    font-size: 0.75rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .shooting-info-header {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Left side layout adjustments - Force 2x2 grid with CSS Grid */
+  .shooting-info-panel {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto auto auto !important;
+    gap: 1rem !important;
+  }
+
+  /* Header spans full width */
+  .shooting-info-header {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Info sections in 2x2 grid */
+  .info-section:nth-of-type(1) {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+  }
+
+  .info-section:nth-of-type(2) {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+  }
+
+  .info-section:nth-of-type(3) {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+  }
+
+  .info-section:nth-of-type(4) {
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+  }
+
+  .info-section {
+    margin-bottom: 0 !important;
+    float: none !important;
+    width: auto !important;
+    margin-right: 0 !important;
+  }
+
+  /* Clear any floats */
+  .info-section:nth-of-type(2)::after,
+  .info-section:nth-of-type(4)::after {
+    display: none !important;
+  }
+
+  .shooting-info-panel::after {
+    display: none !important;
+  }
+
+  .info-label {
+    font-size: 0.75rem !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 4px !important;
+    display: inline-block !important;
+  }
+
+  .info-value {
+    font-size: 2rem !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .score-number {
+    font-size: 4rem !important;
+    font-weight: 800 !important;
+    color: #ffd700 !important;
+  }
+
+  .score-unit {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    opacity: 0.8 !important;
+  }
+
+  .info-value-large {
+    font-size: 4rem !important;
+    color: #ffd700 !important;
+  }
+
+  .shooting-info-title {
+    font-size: 2.5rem !important;
+  }
+
+  .info-meta {
+    font-size: 1rem !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    padding: 0.5rem !important;
+    border-radius: 6px !important;
+    border-left: 3px solid #ffd700 !important;
+  }
+
+  .target-instruction {
+    font-size: 1.125rem !important;
+    margin-bottom: 1rem !important;
+    order: -1 !important;
+  }
+
+  /* Move board down with margin */
+  .archery-target-board {
+    width: 280px !important;
+    height: 280px !important;
+    order: 1 !important;
+    margin-top: 2rem !important;
+  }
+
+  .target-stand {
+    width: 280px !important;
+    height: 120px !important;
+    margin-top: -40px !important;
+    order: 2 !important;
+  }
+
+  .stand-leg {
+    width: 50px !important;
+  }
+
+  .stand-leg-center {
+    height: 160px !important;
+    width: 45px !important;
+  }
+
+  .stand-leg-left,
+  .stand-leg-right {
+    height: 180px !important;
+  }
+
+  /* Much smaller rings */
+  .ring-A { 
+    width: 56px !important;
+    height: 56px !important;
+  }
+  
+  .ring-B { 
+    width: 112px !important;
+    height: 112px !important;
+  }
+  
+  .ring-C { 
+    width: 168px !important;
+    height: 168px !important;
+  }
+  
+  .ring-D { 
+    width: 224px !important;
+    height: 224px !important;
+  }
+  
+  .ring-E { 
+    width: 280px !important;
+    height: 280px !important;
+  }
+  
+  .ring-F { 
+    width: 280px !important;
+    height: 280px !important;
+  }
+
+  /* Hide ring labels, show only center points */
+  .ring-info {
+    display: none !important;
+  }
+
+  .ring-A .ring-info {
+    display: block !important;
+  }
+
+  .ring-A .ring-label {
+    display: none !important;
+  }
+
+  .ring-A .ring-points {
+    font-size: 1.25rem !important;
+    margin-top: 0 !important;
+  }
+
+  /* Smaller ring labels and points */
+  .ring-label {
+    font-size: 1.25rem !important;
+  }
+
+  .ring-points {
+    font-size: 0.75rem !important;
+  }
+
+  /* Clouds smaller */
+  .cloud-1 {
+    width: 80px !important;
+    height: 28px !important;
+  }
+
+  .cloud-1::before {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .cloud-1::after {
+    width: 40px !important;
+    height: 25px !important;
+  }
+
+  .cloud-2 {
+    width: 65px !important;
+    height: 24px !important;
+  }
+
+  .cloud-2::before {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .cloud-2::after {
+    width: 35px !important;
+    height: 20px !important;
+  }
+
+  .cloud-3 {
+    width: 60px !important;
+    height: 20px !important;
+  }
+
+  .cloud-3::before {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .cloud-3::after {
+    width: 30px !important;
+    height: 18px !important;
+  }
+  /* Progress bar always at bottom - FULL WIDTH */
+  .shooting-progress {
+    margin-top: auto !important;
+    padding-top: 1.5rem !important;
+    border-top: 2px solid rgba(255, 215, 0, 0.3) !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+  } border-top: 2px solid rgba(255, 215, 0, 0.3) !important;
+  }
+
+  .progress-label {
+    font-size: 0.75rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+  }
+
+  .progress {
+    height: 2.5rem !important;
+    border: 1px solid rgba(255, 215, 0, 0.3) !important;
+  }
+
+  .progress-bar {
+    font-weight: 800 !important;
+    font-size: 1.125rem !important;
+    color: #000000 !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .shooting-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .shooting-info-panel {
+    border-right: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .archery-target-board {
+    width: 400px;
+    height: 400px;
+  }
+
+  .target-stand {
+    width: 400px;
+    height: 160px;
+    margin-top: -80px;
+  }
+
+  .stand-leg {
+    width: 65px;
+    height: 220px;
+  }
+
+  .stand-leg-center {
+    width: 75px;
+    height: 230px;
+  }
+
+  .ring-A { width: 80px; height: 80px; }
+  .ring-B { width: 160px; height: 160px; }
+  .ring-C { width: 240px; height: 240px; }
+  .ring-D { width: 320px; height: 320px; }
+  .ring-E { width: 400px; height: 400px; }
+  .ring-F { width: 400px; height: 400px; }
+}
+
+@media (max-width: 768px) {
+  .shooting-desk-container {
+    padding: 1rem;
+  }
+
+  .shooting-info-panel,
+  .shooting-target-panel {
+    padding: 2rem;
+  }
+
+  .archery-target-board {
+    width: 300px;
+    height: 300px;
+  }
+
+  .target-stand {
+    width: 300px;
+    height: 120px;
+    margin-top: -60px;
+  }
+
+  .stand-leg {
+    width: 50px;
+    height: 170px;
+  }
+
+  .stand-leg-center {
+    width: 60px;
+    height: 180px;
+  }
+
+  .ring-A { width: 60px; height: 60px; }
+  .ring-B { width: 120px; height: 120px; }
+  .ring-C { width: 180px; height: 180px; }
+  .ring-D { width: 240px; height: 240px; }
+  .ring-E { width: 300px; height: 300px; }
+  .ring-F { width: 300px; height: 300px; }
+
+  .ring-label {
+    font-size: 1.5rem;
+  }
+
+  .ring-points {
+    font-size: 0.875rem;
+  }
+}
