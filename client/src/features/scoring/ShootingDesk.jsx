@@ -6,6 +6,7 @@ import TargetSelector from './TargetSelector';
 import ActiveArcherDisplay from './ActiveArcherDisplay';
 import RoundSummary from './RoundSummary';
 import ArcheryTarget from './ArcheryTarget';
+import Swal from 'sweetalert2';
 import './ShootingDesk.css';
 
 function ShootingDesk() {
@@ -49,18 +50,21 @@ function ShootingDesk() {
   }
 
   if (tournament.status === 'completed') {
-    return (
-      <div className="alert alert-info">
-        <h4>Tournament Completed</h4>
-        <p>This tournament has finished.</p>
-        <button 
-          className="btn btn-primary"
-          onClick={() => navigate(`/results/${tournament.id}`)}
-        >
-          View Results
-        </button>
-      </div>
-    );
+    // Show SweetAlert and redirect
+    Swal.fire({
+      title: 'Tournament Completed!',
+      text: 'This tournament has finished.',
+      icon: 'success',
+      timer: 3000,
+      showConfirmButton: false,
+      timerProgressBar: true,
+      willClose: () => {
+        navigate(`/results/${tournament.id}`);
+      }
+    });
+    
+    // Return null while redirecting
+    return null;
   }
 
   // Get current archer

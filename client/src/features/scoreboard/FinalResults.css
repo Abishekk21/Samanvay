@@ -1,0 +1,254 @@
+/* Final Results Container */
+.results-container {
+  min-height: 100vh;
+  max-height: 100vh;
+  padding: 6rem 2rem 2rem 2rem;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.results-content {
+  max-width: 70%;
+  width: 70%;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.results-card {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 2.5rem;
+  overflow: hidden;
+}
+
+/* Results Header */
+.results-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.results-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.results-tournament-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+.results-winner-card {
+  background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
+  border: 2px solid #fbbf24;
+  border-radius: 16px;
+  padding: 2rem;
+  display: inline-block;
+  box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
+}
+
+.results-winner-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 0.5rem;
+}
+
+.results-winner-score {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.25rem;
+  color: #78350f;
+  margin: 0;
+}
+
+/* Results Table */
+.results-standings-table {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.results-standings-table table {
+  margin: 0;
+}
+
+.results-standings-table thead {
+  background: #000000 !important;
+}
+
+.results-standings-table thead th {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1rem;
+  border: none !important;
+  text-align: center;
+  vertical-align: middle;
+  background: #000000 !important;
+}
+
+.results-standings-table tbody td {
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  padding: 1rem;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.results-standings-table tbody tr:hover {
+  background: rgba(30, 58, 138, 0.05);
+}
+
+.results-standings-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Winner Row */
+.winner-row {
+  background: rgba(251, 191, 36, 0.15) !important;
+}
+
+.rank-cell {
+  font-weight: 800;
+  color: #1e293b;
+  font-size: 1.125rem;
+}
+
+/* Action Buttons */
+.results-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.results-actions .btn {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  padding: 0.875rem 1.75rem;
+  border-radius: 8px;
+}
+
+.results-actions .btn-primary {
+  background: linear-gradient(135deg, #1e3a8a 0%, #000000 100%) !important;
+  border: none !important;
+  color: #ffffff;
+}
+
+.results-actions .btn-primary:hover {
+  background: linear-gradient(135deg, #000000 0%, #1e3a8a 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.results-actions .btn-outline-primary {
+  background: transparent;
+  border: 2px solid #1e3a8a;
+  color: #1e3a8a;
+}
+
+.results-actions .btn-outline-primary:hover {
+  background: linear-gradient(135deg, #1e3a8a 0%, #000000 100%);
+  border-color: #1e3a8a;
+  color: #ffffff;
+}
+
+/* Responsive */
+@media (min-width: 1201px) and (max-width: 1600px) {
+  .results-container {
+    padding: 5rem 1.5rem 1.5rem 1.5rem;
+  }
+
+  .results-content {
+    max-width: 75%;
+    width: 75%;
+    max-height: 80vh;
+  }
+
+  .results-card {
+    padding: 2rem;
+  }
+
+  .results-title {
+    font-size: 2.5rem;
+  }
+
+  .results-tournament-name {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .results-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .results-winner-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .results-content {
+    max-width: 90%;
+    width: 90%;
+  }
+
+  .results-card {
+    padding: 2rem;
+  }
+
+  .results-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .results-container {
+    padding: 1rem;
+  }
+
+  .results-content {
+    max-width: 95%;
+    width: 95%;
+  }
+
+  .results-card {
+    padding: 1.5rem;
+  }
+
+  .results-title {
+    font-size: 2rem;
+  }
+
+  .results-standings-table {
+    overflow-x: auto;
+  }
+}

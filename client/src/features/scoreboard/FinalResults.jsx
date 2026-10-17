@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTournament } from '../../hooks/useTournament';
+import './FinalResults.css';
 
 function FinalResults() {
   const { tournamentId } = useParams();
@@ -98,93 +99,93 @@ function FinalResults() {
   const completedRounds = tournament.rounds?.filter(r => r.status === 'completed').length || 0;
 
   return (
-    <div>
-      <div className="text-center mb-5">
-        <h1 className="display-4 mb-3">
-          <i className="bi bi-trophy-fill text-warning me-3"></i>
-          Tournament Complete!
-        </h1>
-        <h2 className="text-muted mb-4">{tournament.name}</h2>
-        
-        {tied && tied.length > 0 ? (
-          <div className="alert alert-warning d-inline-block">
-            <h3 className="mb-2">
-              <i className="bi bi-dash-circle me-2"></i>
-              Tied Result
-            </h3>
-            <p className="mb-0">
-              {tied.map(t => t.teamName).join(' and ')} tied with {tied[0].finalScore} points
-            </p>
+    <div className="results-container">
+      <div className="results-content">
+        <div className="results-card">
+          <div className="results-header">
+            <h1 className="results-title">
+              <i className="bi bi-trophy-fill text-warning me-3"></i>
+              Tournament Complete!
+            </h1>
+            <h2 className="results-tournament-name">{tournament.name}</h2>
+            
+            {tied && tied.length > 0 ? (
+              <div className="results-winner-card" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%)' }}>
+                <h3 className="results-winner-title">
+                  <i className="bi bi-dash-circle me-2"></i>
+                  Tied Result
+                </h3>
+                <p className="results-winner-score">
+                  {tied.map(t => t.teamName).join(' and ')} tied with {tied[0].finalScore} points
+                </p>
+              </div>
+            ) : (
+              <div className="results-winner-card">
+                <h3 className="results-winner-title">
+                  <i className="bi bi-trophy-fill me-2"></i>
+                  Winner: {winner.teamName}
+                </h3>
+                <p className="results-winner-score">
+                  Final Score: <strong>{winner.teamTotal} points</strong>
+                </p>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="alert alert-success d-inline-block">
-            <h3 className="mb-2">
-              <i className="bi bi-trophy-fill me-2"></i>
-              Winner: {winner.teamName}
-            </h3>
-            <p className="mb-0 fs-4">
-              Final Score: <strong>{winner.teamTotal} points</strong>
-            </p>
+
+          {/* Final Standings */}
+          <div className="results-standings-table">
+            <table className="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Team</th>
+                  <th>Archer 1</th>
+                  <th>Score</th>
+                  <th>Archer 2</th>
+                  <th>Score</th>
+                  <th>Bonus</th>
+                  <th>Final Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {standings.map(standing => (
+                  <tr 
+                    key={standing.teamId}
+                    className={standing.rank === 1 ? 'winner-row' : ''}
+                  >
+                    <td className="rank-cell">
+                      {standing.rank === 1 && <i className="bi bi-trophy-fill text-warning me-1"></i>}
+                      {standing.rank}
+                    </td>
+                    <td className="fw-bold">{standing.teamName}</td>
+                    <td>{standing.archer1Name}</td>
+                    <td>{standing.archer1Score}</td>
+                    <td>{standing.archer2Name}</td>
+                    <td>{standing.archer2Score}</td>
+                    <td>
+                      {standing.bonusTotal > 0 && (
+                        <span className="badge bg-success">+{standing.bonusTotal}</span>
+                      )}
+                    </td>
+                    <td className="fw-bold fs-5">{standing.teamTotal}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        )}
-        
-        <p className="text-muted mt-3">
-          Completed in {completedRounds} rounds
-        </p>
-      </div>
 
-      {/* Final Standings */}
-      <div className="standings-table mb-4">
-        <table className="table table-hover mb-0">
-          <thead>
-            <tr>
-              <th width="60">Rank</th>
-              <th>Team</th>
-              <th>Archer 1</th>
-              <th className="text-end">Score</th>
-              <th>Archer 2</th>
-              <th className="text-end">Score</th>
-              <th className="text-end">Bonus</th>
-              <th className="text-end">Final Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {standings.map(standing => (
-              <tr 
-                key={standing.teamId}
-                className={standing.rank === 1 ? 'winner-row' : ''}
-              >
-                <td className="rank-cell">
-                  {standing.rank === 1 && <i className="bi bi-trophy-fill text-warning me-1"></i>}
-                  {standing.rank}
-                </td>
-                <td className="fw-bold">{standing.teamName}</td>
-                <td>{standing.archer1Name}</td>
-                <td className="text-end">{standing.archer1Score}</td>
-                <td>{standing.archer2Name}</td>
-                <td className="text-end">{standing.archer2Score}</td>
-                <td className="text-end">
-                  {standing.bonusTotal > 0 && (
-                    <span className="badge bg-success">+{standing.bonusTotal}</span>
-                  )}
-                </td>
-                <td className="text-end fw-bold fs-5">{standing.teamTotal}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Actions */}
-      <div className="d-flex gap-3 justify-content-center">
-        <Link to={`/history/${tournament.id}`} className="btn btn-outline-primary btn-lg">
-          <i className="bi bi-clock-history me-2"></i>
-          View Round History
-        </Link>
-        <Link to="/" className="btn btn-primary btn-lg">
-          <i className="bi bi-house-door me-2"></i>
-          Dashboard
-        </Link>
+          {/* Actions */}
+          <div className="results-actions">
+            <Link to={`/history/${tournament.id}`} className="btn btn-outline-primary btn-lg">
+              <i className="bi bi-clock-history me-2"></i>
+              View Round History
+            </Link>
+            <Link to="/" className="btn btn-primary btn-lg">
+              <i className="bi bi-house-door me-2"></i>
+              Dashboard
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
