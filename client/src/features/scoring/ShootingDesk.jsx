@@ -141,43 +141,47 @@ function ShootingDesk() {
   // Show round summary after completion
   if (roundComplete && roundSummary) {
     return (
-      <div>
-        <h2 className="mb-4">
-          <i className="bi bi-check-circle text-success me-2"></i>
-          Round {roundNumber} Complete
-        </h2>
+      <div className="round-summary-container">
+        <div className="round-summary-content">
+          <div className="round-summary-card">
+            <h2 className="round-summary-title">
+              <i className="bi bi-check-circle text-success me-2"></i>
+              Round {roundNumber} Complete
+            </h2>
 
-        <RoundSummary 
-          round={roundSummary}
-          tournament={tournament}
-        />
+            <RoundSummary 
+              round={roundSummary}
+              tournament={tournament}
+            />
 
-        <div className="d-flex gap-3 justify-content-center mt-4">
-          <button
-            className="btn btn-outline-primary btn-lg"
-            onClick={handleViewScoreboard}
-          >
-            <i className="bi bi-bar-chart me-2"></i>
-            View Scoreboard
-          </button>
+            <div className="d-flex gap-3 justify-content-center mt-4">
+              <button
+                className="btn btn-outline-primary btn-lg"
+                onClick={handleViewScoreboard}
+              >
+                <i className="bi bi-bar-chart me-2"></i>
+                View Scoreboard
+              </button>
 
-          {tournament.status === 'completed' ? (
-            <button
-              className="btn btn-success btn-lg"
-              onClick={handleViewResults}
-            >
-              <i className="bi bi-trophy me-2"></i>
-              View Final Results
-            </button>
-          ) : (
-            <button
-              className="btn btn-primary btn-lg"
-              onClick={handleStartNextRound}
-            >
-              <i className="bi bi-arrow-right-circle me-2"></i>
-              Start Round {roundNumber + 1}
-            </button>
-          )}
+              {tournament.status === 'completed' ? (
+                <button
+                  className="btn btn-success btn-lg"
+                  onClick={handleViewResults}
+                >
+                  <i className="bi bi-trophy me-2"></i>
+                  View Final Results
+                </button>
+              ) : (
+                <button
+                  className="btn btn-primary btn-lg"
+                  onClick={handleStartNextRound}
+                >
+                  <i className="bi bi-arrow-right-circle me-2"></i>
+                  Start Round {roundNumber + 1}
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     );
