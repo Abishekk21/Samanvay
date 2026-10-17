@@ -11,6 +11,7 @@ import Scoreboard from './features/scoreboard/Scoreboard';
 import RoundHistory from './features/scoreboard/RoundHistory';
 import FinalResults from './features/scoreboard/FinalResults';
 import ErrorBoundary from './components/ErrorBoundary';
+import ScreenSizeRestriction from './components/ScreenSizeRestriction';
 import './components/PageTransitionCurtain.css';
 
 // Map routes to display names
@@ -74,64 +75,66 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div style={{ position: 'relative', minHeight: '100vh' }}>
-        {/* Page Content */}
-        <div key={displayLocation.pathname} className="page-content-wrapper">
-          <Layout>
-            <Routes location={displayLocation}>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/create" element={<CreateTournament />} />
-              <Route path="/setup/:tournamentId" element={<TournamentSetup />} />
-              <Route path="/shooting/:tournamentId" element={<ShootingDesk />} />
-              <Route path="/scoreboard/:tournamentId" element={<Scoreboard />} />
-              <Route path="/history/:tournamentId" element={<RoundHistory />} />
-              <Route path="/results/:tournamentId" element={<FinalResults />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Layout>
+      <ScreenSizeRestriction>
+        <div style={{ position: 'relative', minHeight: '100vh' }}>
+          {/* Page Content */}
+          <div key={displayLocation.pathname} className="page-content-wrapper">
+            <Layout>
+              <Routes location={displayLocation}>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/create" element={<CreateTournament />} />
+                <Route path="/setup/:tournamentId" element={<TournamentSetup />} />
+                <Route path="/shooting/:tournamentId" element={<ShootingDesk />} />
+                <Route path="/scoreboard/:tournamentId" element={<Scoreboard />} />
+                <Route path="/history/:tournamentId" element={<RoundHistory />} />
+                <Route path="/results/:tournamentId" element={<FinalResults />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Layout>
+          </div>
+
+          {/* Diagonal Curtain Overlay - Covering Stage */}
+          {stage === 'covering' && (
+            <motion.div
+              className="page-transition-curtain"
+              initial={{ clipPath: 'polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)' }}
+              animate={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' }}
+              transition={{ duration, ease: easing }}
+              onAnimationComplete={handleCoverComplete}
+            >
+              <motion.div
+                className="curtain-text"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+              >
+                {transitionText}
+              </motion.div>
+            </motion.div>
+          )}
+
+          {/* Diagonal Curtain Overlay - Revealing Stage */}
+          {stage === 'revealing' && (
+            <motion.div
+              className="page-transition-curtain"
+              initial={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' }}
+              animate={{ clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)' }}
+              transition={{ duration, ease: easing }}
+              onAnimationComplete={handleRevealComplete}
+            >
+              <motion.div
+                className="curtain-text"
+                initial={{ opacity: 1, scale: 1 }}
+                animate={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+              >
+                {transitionText}
+              </motion.div>
+            </motion.div>
+          )}
         </div>
-
-        {/* Diagonal Curtain Overlay - Covering Stage */}
-        {stage === 'covering' && (
-          <motion.div
-            className="page-transition-curtain"
-            initial={{ clipPath: 'polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)' }}
-            animate={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' }}
-            transition={{ duration, ease: easing }}
-            onAnimationComplete={handleCoverComplete}
-          >
-            <motion.div
-              className="curtain-text"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: 0.2 }}
-            >
-              {transitionText}
-            </motion.div>
-          </motion.div>
-        )}
-
-        {/* Diagonal Curtain Overlay - Revealing Stage */}
-        {stage === 'revealing' && (
-          <motion.div
-            className="page-transition-curtain"
-            initial={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' }}
-            animate={{ clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)' }}
-            transition={{ duration, ease: easing }}
-            onAnimationComplete={handleRevealComplete}
-          >
-            <motion.div
-              className="curtain-text"
-              initial={{ opacity: 1, scale: 1 }}
-              animate={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-            >
-              {transitionText}
-            </motion.div>
-          </motion.div>
-        )}
-      </div>
+      </ScreenSizeRestriction>
     </ErrorBoundary>
   );
 }

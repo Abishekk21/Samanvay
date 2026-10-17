@@ -183,12 +183,10 @@ function CreateTournament() {
                   type="submit"
                   className="btn btn-primary"
                   disabled={creating || !name.trim()}
+                  style={{ minWidth: '120px' }}
                 >
                   {creating ? (
-                    <>
-                      <span className="spinner-border spinner-border-sm me-2" role="status"></span>
-                      Creating...
-                    </>
+                    <span className="spinner-border spinner-border-sm" role="status"></span>
                   ) : (
                     <>
                       <i className="bi bi-check-circle me-2"></i>
